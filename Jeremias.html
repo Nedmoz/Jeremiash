@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeremias Dias | Portfolio Profissional</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #ffc107;
+            --secondary-color: #f8f9fa;
+            --dark-color: #212529;
+            --text-color: #495057;
+            --accent-color: #fd7e14;
+            --white: #ffffff;
+            --gradient: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--white);
+            color: var(--text-color);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        /* Header Styles */
+        .header {
+            background: var(--white);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: background 0.3s;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.2rem;
+            animation: pulse 2s infinite;
+        }
+
+        .nav-links a {
+            color: var(--dark-color);
+            text-decoration: none;
+            margin: 0 1rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .hero .btn {
+            padding: 1rem 3rem;
+            background: var(--white);
+            color: var(--primary-color);
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .hero .btn:hover {
+            background: var(--accent-color);
+            color: var(--white);
+            transform: scale(1.05);
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .animated-bg span {
+            position: absolute;
+            display: block;
+            width: 20px;
+            height: 20px;
+            background: rgba(255,255,255,0.1);
+            animation: animate 25s linear infinite;
+            bottom: -150px;
+        }
+
+        /* Section Styles */
+        .section-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        .stat-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .circular-progress {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .circular-progress svg {
+            width: 150px;
+            height: 150px;
+            transform: rotate(-90deg);
+        }
+
+        .circular-progress circle {
+            fill: none;
+            stroke-width: 8;
+            stroke-linecap: round;
+        }
+
+        .circular-progress .bg {
+            stroke: #f0f0f0;
+        }
+
+        .circular-progress .progress {
+            stroke: var(--primary-color);
+            stroke-dasharray: 440;
+            stroke-dashoffset: 440;
+            transition: stroke-dashoffset 2s ease;
+        }
+
+        .stat-number {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--dark-color);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        .expertise-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .expertise-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
+        }
+
+        .expertise-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .expertise-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            animation: pulse 2s infinite;
+        }
+
+        /* Blog Section */
+        .blog {
+            background: var(--secondary-color);
+            padding: 100px 0;
+        }
+
+        .blog-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .blog-card {
+            background: var(--white);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .blog-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .blog-content {
+            padding: 2rem;
+        }
+
+        .blog-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
+
+        .blog-content p {
+            color: var(--text-color);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 100%;
+            background: var(--primary-color);
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            margin-bottom: 3rem;
+            position: relative;
+            width: 50%;
+            padding: 0 2rem;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-content {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .timeline-icon {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            right: -20px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-icon {
+            left: -20px;
+        }
+
+        /* Contact Form */
+        .contact {
+            padding: 100px 0;
+            background: var(--white);
+        }
+
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .info-item {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .contact-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .info-item h3 {
+            color: var(--dark-color);
+            margin-bottom: 1rem;
+        }
+
+        .info-item p {
+            color: var(--text-color);
+        }
+
+        .contact-form {
+            background: var(--secondary-color);
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .btn {
+            background: var(--gradient);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark-color);
+            padding: 2rem;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .social-links a {
+            color: var(--white);
+            margin: 0 1rem;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255,193,7,0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(255,193,7,0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(255,193,7,0);
+            }
+        }
+
+        @keyframes animate {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-container {
+                padding: 0 1rem;
+            }
+            
+            .skills-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-form {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <a href="#inicio" class="logo">
+                <span class="logo-icon">JD</span>
+                Jeremias Dias
+            </a>
+            <div class="nav-links">
+                <a href="#sobre">Sobre Mim</a>
+                <a href="#skills">Habilidades</a>
+                <a href="#educacao">Educação</a>
+                <a href="#blog">Blog</a>
+                <a href="#contato">Contacto</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero" id="inicio">
+        <div class="animated-bg">
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="hero-content" data-aos="fade-up">
+            <h1>Desenvolvendo o Futuro Digital</h1>
+            <p>Especialista em Marketing Digital & Desenvolvimento Web</p>
+            <a href="#contato" class="btn">Vamos Conversar</a>
+        </div>
+    </section>
+
+    <!-- Seção Sobre -->
+    <section class="about" id="sobre">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <i class="fas fa-user-circle section-icon"></i>
+                <h2>Sobre Mim</h2>
+                <p>Construindo experiências digitais memoráveis</p>
+            </div>
+
+            <div class="stats-container">
+                <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="circular-progress">
+                        <svg>
+                            <circle class="bg" cx="75" cy="75" r="70"/>
+                            <circle class="progress" cx="75" cy="75" r="70" data-value="50"/>
+                        </svg>
+                        <div class="stat-number">50+</div>
+                    </div>
+                    <h3>Projetos Concluídos</h3>
+                </div>
+
+                <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="circular-progress">
+                        <svg>
+                            <circle class="bg" cx="75" cy="75" r="70"/>
+                            <circle class="progress" cx="75" cy="75" r="70" data-value="30"/>
+                        </svg>
+                        <div class="stat-number">30+</div>
+                    </div>
+                    <h3>Clientes Satisfeitos</h3>
+                </div>
+
+                <div class="stat-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="circular-progress">
+                        <svg>
+                            <circle class="bg" cx="75" cy="75" r="70"/>
+                            <circle class="progress" cx="75" cy="75" r="70" data-value="5"/>
+                        </svg>
+                        <div class="stat-number">5+</div>
+                    </div>
+                    <h3>Anos de Experiência</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Habilidades -->
+    <section class="expertise" id="skills">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <i class="fas fa-brain section-icon"></i>
+                <h2>Habilidades & Expertise</h2>
+                <p>Dominando as tecnologias mais recentes</p>
+            </div>
+
+            <div class="expertise-grid">
+                <div class="expertise-card" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fas fa-code expertise-icon"></i>
+                    <h3>Desenvolvimento Web</h3>
+                    <p>HTML5, CSS3, JavaScript, React</p>
+                </div>
+
+                <div class="expertise-card" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fas fa-search expertise-icon"></i>
+                    <h3>SEO & Marketing</h3>
+                    <p>Otimização para motores de busca e estratégias digitais</p>
+                </div>
+
+                <div class="expertise-card" data-aos="fade-up" data-aos-delay="300">
+                    <i class="fas fa-mobile-alt expertise-icon"></i>
+                    <h3>Design Responsivo</h3>
+                    <p>Layouts adaptáveis para todos os dispositivos</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Blog -->
+    <section class="blog" id="blog">
+        <div class="blog-container">
+            <div class="section-header" data-aos="fade-up">
+                <i class="fas fa-blog section-icon"></i>
+                <h2>Blog</h2>
+                <p>Últimas postagens e atualizações</p>
+            </div>
+
+            <div class="blog-grid">
+                <div class="blog-card" data-aos="fade-up" data-aos-delay="100">
+                    <img src="blog-image1.jpg" alt="Blog Image 1" class="blog-image">
+                    <div class="blog-content">
+                        <h3>Título do Post 1</h3>
+                        <p>Descrição breve do conteúdo ou insights do post...</p>
+                    </div>
+                </div>
+
+                <div class="blog-card" data-aos="fade-up" data-aos-delay="200">
+                    <img src="blog-image2.jpg" alt="Blog Image 2" class="blog-image">
+                    <div class="blog-content">
+                        <h3>Título do Post 2</h3>
+                        <p>Descrição breve do conteúdo ou insights do post...</p>
+                    </div>
+                </div>
+
+                <div class="blog-card" data-aos="fade-up" data-aos-delay="300">
+                    <img src="blog-image3.jpg" alt="Blog Image 3" class="blog-image">
+                    <div class="blog-content">
+                        <h3>Título do Post 3</h3>
+                        <p>Descrição breve do conteúdo ou insights do post...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Educação -->
+    <section class="education" id="educacao">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <i class="fas fa-graduation-cap section-icon"></i>
+                <h2>Educação & Certificações</h2>
+                <p>Aprendizado contínuo e desenvolvimento profissional</p>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item" data-aos="fade-right">
+                    <div class="timeline-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>Marketing Digital Avançado</h3>
+                        <span>Cursa | 2023</span>
+                        <p>Especialização em estratégias digitais, SEO, análise de dados e gestão de campanhas.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item" data-aos="fade-left">
+                    <div class="timeline-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>Desenvolvimento Web Full Stack</h3>
+                        <span>Udemy | 2022</span>
+                        <p>Formação completa em tecnologias front-end e back-end.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item" data-aos="fade-right">
+                    <div class="timeline-icon">
+                        <i class="fas fa-school"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>Ensino Médio</h3>
+                        <span>Escola Secundária do Estoril | 2018-2021</span>
+                        <p>Formação base com ênfase em tecnologia e inovação.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Contato -->
+    <section class="contact" id="contato">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <i class="fas fa-paper-plane section-icon"></i>
+                <h2>Vamos Trabalhar Juntos</h2>
+                <p>Transforme suas ideias em realidade</p>
+            </div>
+                
+            <form id="contactForm" class="contact-form" data-aos="fade-left">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="name" placeholder="Seu Nome" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-control" id="email" placeholder="Seu Email" required>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" id="message" rows="5" placeholder="Sua Mensagem" required></textarea>
+                </div>
+                <button type="submit" class="btn">
+                    <i class="fas fa-paper-plane"></i>
+                    Enviar Mensagem
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="social-links">
+                <a href="https://linkedin.com" target="_blank" class="social-link"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com" target="_blank" class="social-link"><i class="fab fa-github"></i></a>
+                <a href="https://instagram.com" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
+                <a href="https://wa.me/your_whatsapp_number" target="_blank" class="social-link"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <p>&copy; 2025 Jeremias Dias. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://kit.fontawesome.com/your-kit-code.js"></script>
+    <script>
+        // Inicialização AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+
+        // Formulário de Contato
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                message: document.getElementById('message').value
+            };
+
+            // Aqui você pode adicionar a lógica para enviar o email
+            // Exemplo usando EmailJS ou outro serviço de email
+            
+            alert('Mensagem enviada com sucesso!');
+            this.reset();
+        });
+
+        // Animação dos gráficos circulares
+        function animateCircularProgress() {
+            const circles = document.querySelectorAll('.circular-progress .progress');
+            circles.forEach(circle => {
+                const value = circle.getAttribute('data-value');
+                const circumference = 2 * Math.PI * 70;
+                const offset = circumference - (value / 100) * circumference;
+                circle.style.strokeDasharray = circumference;
+                circle.style.strokeDashoffset = circumference;
+                
+                setTimeout(() => {
+                    circle.style.strokeDashoffset = offset;
+                }, 100);
+            });
+        }
+
+        // Observer para animações
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    if(entry.target.classList.contains('stats-container')) {
+                        animateCircularProgress();
+                    }
+                    observer.unobserve(entry.target);
+                }
+            });
+        });
+
+        document.querySelectorAll('.stats-container').forEach(container => {
+            observer.observe(container);
+        });
+    </script>
+</body>
+</html>
